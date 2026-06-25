@@ -86,7 +86,6 @@
             text-transform: uppercase;
         }
 
-        /* Status badge */
         .status-badge {
             display: inline-flex;
             align-items: center;
@@ -123,9 +122,9 @@
             line-height: 1.1;
             margin-bottom: 1rem;
             background: linear-gradient(to right, #ffffff, #a7f3d0);
-          -webkit-background-clip: text;
-background-clip: text;
--webkit-text-fill-color: transparent;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .main-content p {
@@ -137,7 +136,6 @@ background-clip: text;
             letter-spacing: 0.02em;
         }
 
-        /* Spec strip */
         .spec-strip {
             display: flex;
             justify-content: center;
@@ -175,7 +173,6 @@ background-clip: text;
             background: rgba(255,255,255,0.1);
         }
 
-        /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
@@ -219,7 +216,6 @@ background-clip: text;
             font-weight: 600;
         }
 
-        /* Email form */
         .notify-section { max-width: 680px; margin: 0 auto; }
 
         .notify-form { display: flex; gap: 0.5rem; }
@@ -326,7 +322,6 @@ background-clip: text;
 
             <p>New site deployment in progress.<br/>Structural load calculations complete. Final inspection underway.</p>
 
-            <!-- Spec strip -->
             <div class="spec-strip">
                 <div class="spec-item">
                     <span class="spec-value">RC 9626084</span>
@@ -349,7 +344,6 @@ background-clip: text;
                 </div>
             </div>
 
-            <!-- Countdown -->
             <div class="countdown" id="countdown">
                 <div class="time-box">
                     <div class="time-value" id="days">00</div>
@@ -369,7 +363,6 @@ background-clip: text;
                 </div>
             </div>
 
-            <!-- Notify -->
             <div class="notify-section">
                 <div class="notify-form" id="notifyForm">
                     <input type="email" id="emailInput" class="notify-input" placeholder="Your email address" required>
@@ -384,12 +377,12 @@ background-clip: text;
     </div>
 
     <footer>
-        &copy; 2026 KOA Engineering 
+        &copy; 2026 KOA Engineering
     </footer>
 
     <script>
-        // Countdown: 7 days from the moment the page loads
-        const launch = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        // Countdown: 21 days from the moment the page first loads
+        const launch = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000);
 
         function updateCountdown() {
             const now      = new Date().getTime();
