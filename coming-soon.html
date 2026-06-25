@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOA Engineering — Coming Soon</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --brand-green: #10b981;
+            --brand-green-dark: #059669;
+            --text-light: #f8fafc;
+            --text-muted: #cbd5e1;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-light);
+            background-color: #000;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        .background {
+            position: absolute;
+            inset: 0;
+            background-image: url('images/KOA22.png');
+            background-size: cover;
+            background-position: center;
+            z-index: -2;
+        }
+
+        .overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(6,30,20,0.85) 0%, rgba(2,9,6,0.95) 100%);
+            z-index: -1;
+            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(4px);
+        }
+
+        .container {
+            width: 100%;
+            max-width: 900px;
+            padding: 2rem;
+            text-align: center;
+            z-index: 1;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        header { margin-bottom: 2.5rem; }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 0.6rem;
+            display: inline-block;
+        }
+
+        .logo span { color: var(--brand-green); }
+
+        .subtitle {
+            font-size: 0.7rem;
+            font-weight: 400;
+            color: var(--text-muted);
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+        }
+
+        /* Status badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.25);
+            border-radius: 4px;
+            padding: 6px 16px;
+            margin-bottom: 2rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--brand-green);
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--brand-green);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50%       { opacity: 0.2; }
+        }
+
+        .main-content h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.6rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #a7f3d0);
+          -webkit-background-clip: text;
+background-clip: text;
+-webkit-text-fill-color: transparent;
+        }
+
+        .main-content p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            max-width: 680px;
+            margin: 0 auto 2.8rem auto;
+            line-height: 1.7;
+            letter-spacing: 0.02em;
+        }
+
+        /* Spec strip */
+        .spec-strip {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin-bottom: 2.8rem;
+            flex-wrap: wrap;
+        }
+
+        .spec-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .spec-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 0.06em;
+        }
+
+        .spec-label {
+            font-size: 0.62rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(168,212,192,0.5);
+        }
+
+        .spec-divider {
+            width: 1px;
+            height: 34px;
+            background: rgba(255,255,255,0.1);
+        }
+
+        /* Countdown */
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 3.2rem;
+        }
+
+        .time-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.09);
+            padding: 1.4rem 1.2rem;
+            border-radius: 8px;
+            min-width: 108px;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            transition: border-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .time-box:hover {
+            transform: translateY(-4px);
+            border-color: rgba(16,185,129,0.3);
+        }
+
+        .time-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 3.2rem;
+            font-weight: 700;
+            color: #fff;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .time-label {
+            font-size: 0.62rem;
+            text-transform: uppercase;
+            letter-spacing: 0.25em;
+            color: var(--brand-green);
+            font-weight: 600;
+        }
+
+        /* Email form */
+        .notify-section { max-width: 680px; margin: 0 auto; }
+
+        .notify-form { display: flex; gap: 0.5rem; }
+
+        .notify-input {
+            flex: 1;
+            padding: 0.85rem 1.4rem;
+            font-size: 0.88rem;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 50px;
+            color: #fff;
+            outline: none;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .notify-input::placeholder { color: rgba(255,255,255,0.38); }
+
+        .notify-input:focus {
+            background: rgba(255,255,255,0.1);
+            border-color: var(--brand-green);
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
+        }
+
+        .notify-btn {
+            background: var(--brand-green);
+            color: #fff;
+            border: none;
+            padding: 0 1.8rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+
+        .notify-btn:hover {
+            background: var(--brand-green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16,185,129,0.3);
+        }
+
+        .success-msg {
+            display: none;
+            margin-top: 1rem;
+            color: #a7f3d0;
+            font-size: 0.82rem;
+            font-weight: 500;
+            animation: fadeIn 0.5s ease-out;
+            background: rgba(16,185,129,0.08);
+            padding: 0.8rem 1.2rem;
+            border-radius: 6px;
+            border: 1px solid rgba(16,185,129,0.2);
+            letter-spacing: 0.06em;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 1.8rem;
+            width: 100%;
+            text-align: center;
+            font-size: 0.68rem;
+            color: rgba(255,255,255,0.25);
+            z-index: 1;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            .main-content h1 { font-size: 2.4rem; }
+            .countdown { gap: 0.8rem; flex-wrap: wrap; }
+            .time-box { min-width: calc(50% - 0.4rem); padding: 1rem; }
+            .time-value { font-size: 2.4rem; }
+            .notify-form { flex-direction: column; }
+            .notify-btn { padding: 0.85rem 1.4rem; }
+            .spec-divider { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="background"></div>
+    <div class="overlay"></div>
+
+    <div class="container">
+        <header>
+            <div class="logo">KOA <span>Engineering</span></div>
+            <div class="subtitle">Structural &nbsp;·&nbsp; Civil &nbsp;·&nbsp; Highway &nbsp;·&nbsp; Environmental &nbsp;·&nbsp; Consultancy</div>
+        </header>
+
+        <main class="main-content">
+
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                Site Under Construction
+            </div>
+
+            <h1>Engineered for Excellence.</h1>
+
+            <p>New site deployment in progress.<br/>Structural load calculations complete. Final inspection underway.</p>
+
+            <!-- Spec strip -->
+            <div class="spec-strip">
+                <div class="spec-item">
+                    <span class="spec-value">RC 9626084</span>
+                    <span class="spec-label">CAC Registration</span>
+                </div>
+                <div class="spec-divider"></div>
+                <div class="spec-item">
+                    <span class="spec-value">Est. 2019</span>
+                    <span class="spec-label">Year Founded</span>
+                </div>
+                <div class="spec-divider"></div>
+                <div class="spec-item">
+                    <span class="spec-value">50+</span>
+                    <span class="spec-label">Projects Delivered</span>
+                </div>
+                <div class="spec-divider"></div>
+                <div class="spec-item">
+                    <span class="spec-value">100%</span>
+                    <span class="spec-label">Nigerian Owned</span>
+                </div>
+            </div>
+
+            <!-- Countdown -->
+            <div class="countdown" id="countdown">
+                <div class="time-box">
+                    <div class="time-value" id="days">00</div>
+                    <div class="time-label">Days</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-value" id="hours">00</div>
+                    <div class="time-label">Hours</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-value" id="minutes">00</div>
+                    <div class="time-label">Minutes</div>
+                </div>
+                <div class="time-box">
+                    <div class="time-value" id="seconds">00</div>
+                    <div class="time-label">Seconds</div>
+                </div>
+            </div>
+
+            <!-- Notify -->
+            <div class="notify-section">
+                <div class="notify-form" id="notifyForm">
+                    <input type="email" id="emailInput" class="notify-input" placeholder="Your email address" required>
+                    <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
+                </div>
+                <div class="success-msg" id="successMsg">
+                    ✓ &nbsp;Logged. You will be notified at go-live.
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <footer>
+        &copy; 2026 KOA Engineering 
+    </footer>
+
+    <script>
+        // Countdown: 7 days from the moment the page loads
+        const launch = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+
+        function updateCountdown() {
+            const now      = new Date().getTime();
+            const distance = launch.getTime() - now;
+
+            if (distance < 0) {
+                document.getElementById('countdown').innerHTML =
+                    '<h2 style="color:#10b981;letter-spacing:0.2em;font-family:Outfit,sans-serif;font-size:1.6rem;">SYSTEM ONLINE</h2>';
+                return;
+            }
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText    = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText   = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        function handleNotify() {
+            const input = document.getElementById('emailInput');
+            const msg   = document.getElementById('successMsg');
+            const email = input.value.trim();
+
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                input.style.borderColor = 'rgba(255,100,100,0.5)';
+                setTimeout(() => input.style.borderColor = '', 1500);
+                return;
+            }
+
+            // Optional Formspree integration:
+            // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            //   method: 'POST',
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify({ email })
+            // });
+
+            input.style.display = 'none';
+            document.querySelector('.notify-btn').style.display = 'none';
+            msg.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
