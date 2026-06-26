@@ -381,8 +381,15 @@
     </footer>
 
     <script>
-        // Countdown: 21 days from the moment the page first loads
-        const launch = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000);
+        // Persist launch date across refreshes using localStorage
+        let launchTime = localStorage.getItem('koa_launch');
+
+        if (!launchTime) {
+            launchTime = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).getTime();
+            localStorage.setItem('koa_launch', launchTime);
+        }
+
+        const launch = new Date(parseInt(launchTime));
 
         function updateCountdown() {
             const now      = new Date().getTime();
@@ -418,13 +425,6 @@
                 setTimeout(() => input.style.borderColor = '', 1500);
                 return;
             }
-
-            // Optional Formspree integration:
-            // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ email })
-            // });
 
             input.style.display = 'none';
             document.querySelector('.notify-btn').style.display = 'none';
