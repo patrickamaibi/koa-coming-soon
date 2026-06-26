@@ -376,17 +376,13 @@
         </main>
     </div>
 
+    <footer>
+        &copy; 2026 KOA Engineering
+    </footer>
 
     <script>
-        // Persist launch date across refreshes using localStorage
-        let launchTime = localStorage.getItem('koa_launch');
-
-        if (!launchTime) {
-            launchTime = new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).getTime();
-            localStorage.setItem('koa_launch', launchTime);
-        }
-
-        const launch = new Date(parseInt(launchTime));
+        // Fixed launch date — July 15, 2026 midnight
+        const launch = new Date('2026-07-15T00:00:00');
 
         function updateCountdown() {
             const now      = new Date().getTime();
@@ -422,6 +418,13 @@
                 setTimeout(() => input.style.borderColor = '', 1500);
                 return;
             }
+
+            // Optional Formspree integration:
+            // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+            //   method: 'POST',
+            //   headers: { 'Content-Type': 'application/json' },
+            //   body: JSON.stringify({ email })
+            // });
 
             input.style.display = 'none';
             document.querySelector('.notify-btn').style.display = 'none';
