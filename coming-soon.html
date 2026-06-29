@@ -3,429 +3,415 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KOA Engineering — Coming Soon</title>
+    <title>KOA Engineering</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=Outfit:wght@500;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --brand-green: #10b981;
-            --brand-green-dark: #059669;
-            --text-light: #f8fafc;
-            --text-muted: #cbd5e1;
-        }
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-light);
-            background-color: #000;
+            font-family: 'DM Sans', sans-serif;
+            background: #0a0f0d;
+            color: #fff;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        .background {
-            position: absolute;
+        .bg {
+            position: fixed;
             inset: 0;
             background-image: url('images/KOA22.png');
             background-size: cover;
             background-position: center;
-            z-index: -2;
+            z-index: 0;
         }
 
-        .overlay {
+        .bg::after {
+            content: '';
             position: absolute;
             inset: 0;
-            background: linear-gradient(135deg, rgba(6,30,20,0.85) 0%, rgba(2,9,6,0.95) 100%);
-            z-index: -1;
-            -webkit-backdrop-filter: blur(4px);
-            backdrop-filter: blur(4px);
+            background: linear-gradient(to bottom,
+                rgba(8,16,11,0.80) 0%,
+                rgba(8,16,11,0.65) 50%,
+                rgba(8,16,11,0.92) 100%);
         }
 
-        .container {
-            width: 100%;
-            max-width: 900px;
-            padding: 2rem;
-            text-align: center;
+        .page {
+            position: relative;
             z-index: 1;
-            animation: fadeIn 1.5s ease-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100vh;
+            padding: 3rem 4rem;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to   { opacity: 1; transform: translateY(0); }
+        /* ── Header ── */
+        header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
 
-        header { margin-bottom: 2.5rem; }
-
-        .logo {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.5rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+        .wordmark {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.22em;
             text-transform: uppercase;
             color: #fff;
-            margin-bottom: 0.6rem;
-            display: inline-block;
         }
 
-        .logo span { color: var(--brand-green); }
+        .wordmark span { color: #A8C5B0; }
 
-        .subtitle {
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: var(--text-muted);
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16,185,129,0.08);
-            border: 1px solid rgba(16,185,129,0.25);
-            border-radius: 4px;
-            padding: 6px 16px;
-            margin-bottom: 2rem;
-            font-size: 0.68rem;
+        .est {
+            font-size: 0.65rem;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: var(--brand-green);
-            font-weight: 600;
+            color: rgba(255,255,255,0.28);
+            font-weight: 300;
         }
 
-        .status-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--brand-green);
+        /* ── Center ── */
+        .center {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: 760px;
+        }
+
+        .eyebrow {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+
+        .dot {
+            width: 5px;
+            height: 5px;
             border-radius: 50%;
-            animation: blink 2s infinite;
+            background: #A8C5B0;
+            animation: pulse 2.4s ease-in-out infinite;
         }
 
-        @keyframes blink {
+        @keyframes pulse {
             0%, 100% { opacity: 1; }
             50%       { opacity: 0.2; }
         }
 
-        .main-content h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.6rem;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 1rem;
-            background: linear-gradient(to right, #ffffff, #a7f3d0);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .main-content p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            max-width: 680px;
-            margin: 0 auto 2.8rem auto;
-            line-height: 1.7;
-            letter-spacing: 0.02em;
-        }
-
-        .spec-strip {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2.8rem;
-            flex-wrap: wrap;
-        }
-
-        .spec-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .spec-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: #fff;
-            letter-spacing: 0.06em;
-        }
-
-        .spec-label {
-            font-size: 0.62rem;
-            letter-spacing: 0.28em;
+        .eyebrow-text {
+            font-size: 0.65rem;
+            letter-spacing: 0.32em;
             text-transform: uppercase;
-            color: rgba(168,212,192,0.5);
+            color: #A8C5B0;
+            font-weight: 400;
         }
 
-        .spec-divider {
-            width: 1px;
-            height: 34px;
-            background: rgba(255,255,255,0.1);
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+            font-weight: 300;
+            line-height: 1.1;
+            letter-spacing: 0.01em;
+            color: #fff;
+            margin-bottom: 1.6rem;
         }
 
+        h1 em {
+            font-style: italic;
+            color: #A8C5B0;
+        }
+
+        .rule {
+            width: 48px;
+            height: 1px;
+            background: rgba(168,197,176,0.4);
+            margin-bottom: 1.6rem;
+        }
+
+        .tagline {
+            font-size: 0.8rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.38);
+            letter-spacing: 0.1em;
+        }
+
+        /* ── Countdown ── */
         .countdown {
             display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin-bottom: 3.2rem;
+            align-items: flex-start;
+            gap: 0.6rem;
+            margin-top: 3.8rem;
         }
 
-        .time-box {
+        .time-unit {
             display: flex;
             flex-direction: column;
             align-items: center;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.09);
-            padding: 1.4rem 1.2rem;
-            border-radius: 8px;
-            min-width: 108px;
-            -webkit-backdrop-filter: blur(10px);
-            backdrop-filter: blur(10px);
-            transition: border-color 0.3s ease, transform 0.3s ease;
+            gap: 12px;
         }
 
-        .time-box:hover {
-            transform: translateY(-4px);
-            border-color: rgba(16,185,129,0.3);
+        /* Flip card shell */
+        .flip-card {
+            position: relative;
+            width: 108px;
+            height: 128px;
         }
 
-        .time-value {
-            font-family: 'Outfit', sans-serif;
-            font-size: 3.2rem;
-            font-weight: 700;
+        /* Static halves */
+        .flip-top, .flip-bottom {
+            position: absolute;
+            left: 0; right: 0;
+            height: 50%;
+            overflow: hidden;
+            background: rgba(18,30,23,0.75);
+            border: 1px solid rgba(168,197,176,0.10);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .flip-top {
+            top: 0;
+            border-radius: 6px 6px 0 0;
+            border-bottom: 1px solid rgba(0,0,0,0.5);
+            display: flex; align-items: flex-end; justify-content: center;
+        }
+
+        .flip-bottom {
+            bottom: 0;
+            border-radius: 0 0 6px 6px;
+            display: flex; align-items: flex-start; justify-content: center;
+        }
+
+        .flip-top .num   { transform: translateY(50%); }
+        .flip-bottom .num { transform: translateY(-50%); }
+
+        .num {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 5.6rem;
+            font-weight: 300;
             color: #fff;
             line-height: 1;
-            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+            user-select: none;
+        }
+
+        /* Animated flap */
+        .flip-flap {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 50%;
+            transform-origin: bottom center;
+            backface-visibility: hidden;
+            border-radius: 6px 6px 0 0;
+            background: rgba(22,38,28,0.85);
+            border: 1px solid rgba(168,197,176,0.12);
+            border-bottom: 1px solid rgba(0,0,0,0.5);
+            display: flex; align-items: flex-end; justify-content: center;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .flip-flap .num { transform: translateY(50%); }
+
+        .flip-flap.go {
+            animation: flipDown 0.45s cubic-bezier(0.45, 0.03, 0.52, 0.96) forwards;
+        }
+
+        @keyframes flipDown {
+            0%   { transform: rotateX(0deg); box-shadow: none; }
+            50%  { box-shadow: 0 8px 24px rgba(0,0,0,0.45); }
+            100% { transform: rotateX(-90deg); box-shadow: none; }
+        }
+
+        /* Separator */
+        .sep {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4.8rem;
+            font-weight: 300;
+            color: rgba(168,197,176,0.25);
+            line-height: 1;
+            padding-bottom: 32px;
+            user-select: none;
+            align-self: flex-end;
         }
 
         .time-label {
-            font-size: 0.62rem;
+            font-size: 0.56rem;
+            letter-spacing: 0.34em;
             text-transform: uppercase;
-            letter-spacing: 0.25em;
-            color: var(--brand-green);
-            font-weight: 600;
-        }
-
-        .notify-section { max-width: 680px; margin: 0 auto; }
-
-        .notify-form { display: flex; gap: 0.5rem; }
-
-        .notify-input {
-            flex: 1;
-            padding: 0.85rem 1.4rem;
-            font-size: 0.88rem;
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.14);
-            border-radius: 50px;
-            color: #fff;
-            outline: none;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .notify-input::placeholder { color: rgba(255,255,255,0.38); }
-
-        .notify-input:focus {
-            background: rgba(255,255,255,0.1);
-            border-color: var(--brand-green);
-            box-shadow: 0 0 0 3px rgba(16,185,129,0.1);
-        }
-
-        .notify-btn {
-            background: var(--brand-green);
-            color: #fff;
-            border: none;
-            padding: 0 1.8rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.14em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Inter', sans-serif;
-            white-space: nowrap;
-        }
-
-        .notify-btn:hover {
-            background: var(--brand-green-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16,185,129,0.3);
-        }
-
-        .success-msg {
-            display: none;
-            margin-top: 1rem;
-            color: #a7f3d0;
-            font-size: 0.82rem;
-            font-weight: 500;
-            animation: fadeIn 0.5s ease-out;
-            background: rgba(16,185,129,0.08);
-            padding: 0.8rem 1.2rem;
-            border-radius: 6px;
-            border: 1px solid rgba(16,185,129,0.2);
-            letter-spacing: 0.06em;
-        }
-
-        footer {
-            position: absolute;
-            bottom: 1.8rem;
-            width: 100%;
-            text-align: center;
-            font-size: 0.68rem;
             color: rgba(255,255,255,0.25);
-            z-index: 1;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
+            font-weight: 300;
         }
 
-        @media (max-width: 768px) {
-            .main-content h1 { font-size: 2.4rem; }
-            .countdown { gap: 0.8rem; flex-wrap: wrap; }
-            .time-box { min-width: calc(50% - 0.4rem); padding: 1rem; }
-            .time-value { font-size: 2.4rem; }
-            .notify-form { flex-direction: column; }
-            .notify-btn { padding: 0.85rem 1.4rem; }
-            .spec-divider { display: none; }
+        /* ── Footer ── */
+        footer {
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+        }
+
+        .footer-left, .footer-right {
+            font-size: 0.62rem;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.18);
+            font-weight: 300;
+            line-height: 1.9;
+        }
+
+        .footer-right { text-align: right; }
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+            .page { padding: 1.8rem; }
+            .est { display: none; }
+            h1 { font-size: 2.4rem; }
+            .flip-card { width: 72px; height: 86px; }
+            .num { font-size: 3.6rem; }
+            .sep { font-size: 3rem; padding-bottom: 20px; }
+            .countdown { gap: 0.3rem; }
+            .footer-right { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="background"></div>
-    <div class="overlay"></div>
+<div class="bg"></div>
 
-    <div class="container">
-        <header>
-            <div class="logo">KOA <span>Engineering</span></div>
-            <div class="subtitle">Structural &nbsp;·&nbsp; Civil &nbsp;·&nbsp; Highway &nbsp;·&nbsp; Environmental &nbsp;·&nbsp; Consultancy</div>
-        </header>
+<div class="page">
 
-        <main class="main-content">
+    <header>
+        <div class="wordmark">KOA <span>Engineering</span></div>
+        <div class="est">Est. 2019</div>
+    </header>
 
-            <div class="status-badge">
-                <span class="status-dot"></span>
-                Site Under Construction
+    <div class="center">
+        <div class="eyebrow">
+            <div class="dot"></div>
+            <span class="eyebrow-text">Coming Soon</span>
+        </div>
+
+        <h1>Pushing Boundaries.<br><em>Building Futures.</em></h1>
+
+        <div class="rule"></div>
+
+        <p class="tagline">Structural &nbsp;·&nbsp; Civil &nbsp;·&nbsp; Highway &nbsp;·&nbsp; Environmental</p>
+
+        <div class="countdown" id="countdown">
+            <div class="time-unit">
+                <div class="flip-card" id="card-d">
+                    <div class="flip-top"><span class="num" id="top-d">00</span></div>
+                    <div class="flip-bottom"><span class="num" id="bot-d">00</span></div>
+                    <div class="flip-flap" id="flap-d"><span class="num" id="flap-num-d">00</span></div>
+                </div>
+                <div class="time-label">Days</div>
             </div>
 
-            <h1>Engineered for Excellence.</h1>
+            <div class="sep">:</div>
 
-            <p>New site deployment in progress.<br/>Structural load calculations complete. Final inspection underway.</p>
-
-            <div class="spec-strip">
-                <div class="spec-item">
-                    <span class="spec-value">RC 9626084</span>
-                    <span class="spec-label">CAC Registration</span>
+            <div class="time-unit">
+                <div class="flip-card" id="card-h">
+                    <div class="flip-top"><span class="num" id="top-h">00</span></div>
+                    <div class="flip-bottom"><span class="num" id="bot-h">00</span></div>
+                    <div class="flip-flap" id="flap-h"><span class="num" id="flap-num-h">00</span></div>
                 </div>
-                <div class="spec-divider"></div>
-                <div class="spec-item">
-                    <span class="spec-value">Est. 2019</span>
-                    <span class="spec-label">Year Founded</span>
-                </div>
-                <div class="spec-divider"></div>
-                <div class="spec-item">
-                    <span class="spec-value">50+</span>
-                    <span class="spec-label">Projects Delivered</span>
-                </div>
-                <div class="spec-divider"></div>
-                <div class="spec-item">
-                    <span class="spec-value">100%</span>
-                    <span class="spec-label">Nigerian Owned</span>
-                </div>
+                <div class="time-label">Hours</div>
             </div>
 
-            <div class="countdown" id="countdown">
-                <div class="time-box">
-                    <div class="time-value" id="days">00</div>
-                    <div class="time-label">Days</div>
+            <div class="sep">:</div>
+
+            <div class="time-unit">
+                <div class="flip-card" id="card-m">
+                    <div class="flip-top"><span class="num" id="top-m">00</span></div>
+                    <div class="flip-bottom"><span class="num" id="bot-m">00</span></div>
+                    <div class="flip-flap" id="flap-m"><span class="num" id="flap-num-m">00</span></div>
                 </div>
-                <div class="time-box">
-                    <div class="time-value" id="hours">00</div>
-                    <div class="time-label">Hours</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="minutes">00</div>
-                    <div class="time-label">Minutes</div>
-                </div>
-                <div class="time-box">
-                    <div class="time-value" id="seconds">00</div>
-                    <div class="time-label">Seconds</div>
-                </div>
+                <div class="time-label">Minutes</div>
             </div>
 
-            <div class="notify-section">
-                <div class="notify-form" id="notifyForm">
-                    <input type="email" id="emailInput" class="notify-input" placeholder="Your email address" required>
-                    <button class="notify-btn" onclick="handleNotify()">Notify Me</button>
-                </div>
-                <div class="success-msg" id="successMsg">
-                    ✓ &nbsp;Logged. You will be notified at go-live.
-                </div>
-            </div>
+            <div class="sep">:</div>
 
-        </main>
+            <div class="time-unit">
+                <div class="flip-card" id="card-s">
+                    <div class="flip-top"><span class="num" id="top-s">00</span></div>
+                    <div class="flip-bottom"><span class="num" id="bot-s">00</span></div>
+                    <div class="flip-flap" id="flap-s"><span class="num" id="flap-num-s">00</span></div>
+                </div>
+                <div class="time-label">Seconds</div>
+            </div>
+        </div>
     </div>
 
-    <script>
-        // Fixed launch date — July 15, 2026 midnight
-        const launch = new Date('2026-07-15T00:00:00');
+    <footer>
+        <div class="footer-left">
+            Abuja, Nigeria<br>
+            info@koaengineering.com.ng
+        </div>
+        <div class="footer-right">
+            © 2025 KOA Engineering Ltd<br>
+            RC 9626084
+        </div>
+    </footer>
 
-        function updateCountdown() {
-            const now      = new Date().getTime();
-            const distance = launch.getTime() - now;
+</div>
 
-            if (distance < 0) {
-                document.getElementById('countdown').innerHTML =
-                    '<h2 style="color:#10b981;letter-spacing:0.2em;font-family:Outfit,sans-serif;font-size:1.6rem;">SYSTEM ONLINE</h2>';
-                return;
-            }
+<script>
+    const launch = new Date('2026-07-15T00:00:00');
 
-            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const s = Math.floor((distance % (1000 * 60)) / 1000);
+    const prev = { d: null, h: null, m: null, s: null };
 
-            document.getElementById('days').innerText    = d.toString().padStart(2, '0');
-            document.getElementById('hours').innerText   = h.toString().padStart(2, '0');
-            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
-            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+    function pad(n) { return String(n).padStart(2, '0'); }
+
+    function flip(key, newVal) {
+        const top     = document.getElementById('top-' + key);
+        const bot     = document.getElementById('bot-' + key);
+        const flap    = document.getElementById('flap-' + key);
+        const flapNum = document.getElementById('flap-num-' + key);
+
+        // Flap shows the OLD value flying away
+        flapNum.textContent = top.textContent;
+        flap.classList.remove('go');
+        void flap.offsetWidth; // reflow to restart animation
+        flap.classList.add('go');
+
+        // Update static faces immediately
+        top.textContent = newVal;
+        bot.textContent = newVal;
+    }
+
+    function tick() {
+        const gap = launch - Date.now();
+        if (gap <= 0) {
+            document.getElementById('countdown').style.opacity = '0.3';
+            return;
         }
 
-        setInterval(updateCountdown, 1000);
-        updateCountdown();
+        const d = Math.floor(gap / 86400000);
+        const h = Math.floor((gap % 86400000) / 3600000);
+        const m = Math.floor((gap % 3600000) / 60000);
+        const s = Math.floor((gap % 60000) / 1000);
 
-        function handleNotify() {
-            const input = document.getElementById('emailInput');
-            const msg   = document.getElementById('successMsg');
-            const email = input.value.trim();
+        const vals = { d, h, m, s };
 
-            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-                input.style.borderColor = 'rgba(255,100,100,0.5)';
-                setTimeout(() => input.style.borderColor = '', 1500);
-                return;
+        for (const key of ['d','h','m','s']) {
+            const str = pad(vals[key]);
+            if (str !== prev[key]) {
+                flip(key, str);
+                prev[key] = str;
             }
-
-            // Optional Formspree integration:
-            // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify({ email })
-            // });
-
-            input.style.display = 'none';
-            document.querySelector('.notify-btn').style.display = 'none';
-            msg.style.display = 'block';
         }
-    </script>
+    }
+
+    setInterval(tick, 1000);
+    tick();
+</script>
+
 </body>
 </html>
